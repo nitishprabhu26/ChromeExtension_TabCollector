@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Tab collector App",
+    "version": "0.0.1",
+    "description": "A URL Blocker Extension",
+    "permissions": ["storage", "tabs"],
+    "browser_action":{
+        "default_popup": "index.html"
+    },
+    "background":{
+        "scripts":["script/script.js"]
+    }
+
+}
