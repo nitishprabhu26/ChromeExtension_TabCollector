@@ -8,9 +8,17 @@ chrome.runtime.onMessage.addListener(
                 // This method returns -1 if the value to search for never occurs.
                 // Note: The indexOf() method is case sensitive.
                 const urls = window.tabs.filter( t=> t.url.indexOf("chrome://") !=0);
-                console.log(urls);
+                // console.log(urls);
+
+                // get the current urls which are stored in the storage
+                chrome.storage.sync.get(["urlLists"], (obj)=>{
+                    const currentLists = obj.urlLists ? obj.urlLists: [];
+                    const mergedLists = [...currentLists, ...[{title: request.title, urls: urls}]];
+                    console.log(mergedLists);
+                    // set the updated list
+                    chrome.storage.sync.set({urlLists: mergedLists})
+                });
             });
-            // Store New URL's
         }
     }
 );
