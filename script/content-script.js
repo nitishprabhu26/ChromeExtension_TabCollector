@@ -15,6 +15,11 @@ chrome.storage.sync.get(["urlLists"], (obj)=>{
             container.setAttribute("class", "title");
             container.innerHTML=list.title;
 
+            container.addEventListener("click", () => {
+                const urlStrings = list.urls.map((urlObject) => urlObject.url);
+                chrome.windows.create({url:urlStrings});
+            });
+
             list.urls.forEach((element) => {
                 const div = document.createElement("div");
                 div.innerHTML = element.url;
